@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "478487444067",
+    "project_id": "mapmyway-58a97",
+    "storage_bucket": "mapmyway-58a97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478487444067:android:bd8d053083126a9d8e5656",
+        "android_client_info": {
+          "package_name": "com.example.flutter_maps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478487444067-k6alfqhh4f0md7auivvv7nbjpjkssfrh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIEjpyOGbBKlQrW_EjL51xQPdQjIv-wT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478487444067-k6alfqhh4f0md7auivvv7nbjpjkssfrh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
