@@ -20,7 +20,7 @@ class PlaceDirections {
     final northeast = data['bounds']['northeast'];
     final southwest = data['bounds']['southwest'];
     final bounds = LatLngBounds(
-       northeast: LatLng(northeast['lat'], northeast['lng']),
+      northeast: LatLng(northeast['lat'], northeast['lng']),
       southwest: LatLng(southwest['lat'], southwest['lng']),
     );
 

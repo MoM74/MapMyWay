@@ -5,6 +5,7 @@ import 'package:flutter_maps/constnats/my_colors.dart';
 import 'package:flutter_maps/constnats/strings.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../screens/search_screen.dart';
 
 // ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
@@ -121,19 +122,17 @@ class MyDrawer extends StatelessWidget {
   }
 
   Widget buildLogoutBlocProvider(context) {
-    return Container(
-      child: BlocProvider<PhoneAuthCubit>(
-        create: (context) => phoneAuthCubit,
-        child: buildDrawerListItem(
-          leadingIcon: Icons.logout,
-          title: 'Logout',
-          onTap: () async {
-            await phoneAuthCubit.logOut();
-            Navigator.of(context).pushReplacementNamed(loginScreen);
-          },
-          color: Colors.red,
-          trailing: const SizedBox(),
-        ),
+    return BlocProvider<PhoneAuthCubit>(
+      create: (context) => phoneAuthCubit,
+      child: buildDrawerListItem(
+        leadingIcon: Icons.logout,
+        title: 'Logout',
+        onTap: () async {
+          await phoneAuthCubit.logOut();
+          Navigator.of(context).pushReplacementNamed(loginScreen);
+        },
+        color: Colors.red,
+        trailing: const SizedBox(),
       ),
     );
   }
@@ -144,7 +143,7 @@ class MyDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          Container(
+          SizedBox(
             height: 300,
             child: DrawerHeader(
               decoration: BoxDecoration(color: Colors.blue[100]),
@@ -156,7 +155,12 @@ class MyDrawer extends StatelessWidget {
           buildDrawerListItem(
             leadingIcon: Icons.history,
             title: 'Places History',
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => const SearchScreen()));
+            },
           ),
           buildDrawerListItemsDivider(),
           buildDrawerListItem(leadingIcon: Icons.settings, title: 'Settings'),

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_maps/constnats/strings.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -66,8 +67,8 @@ class PlacesWebservices {
           'key': googleAPIKey,
         },
       );
-      print("Omar I'm testing directions");
-      print(response.data);
+      debugPrint("Mohammed I'm testing directions");
+      debugPrint(response.data);
       return response.data;
     } catch (error) {
       return Future.error("Place location error : ",

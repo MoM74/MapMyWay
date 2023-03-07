@@ -93,10 +93,10 @@ class OtpScreen extends StatelessWidget {
       enableActiveFill: true,
       onCompleted: (submitedCode) {
         otpCode = submitedCode;
-        print("Completed");
+        debugPrint("Completed");
       },
       onChanged: (value) {
-        print(value);
+        debugPrint(value);
       },
     );
   }

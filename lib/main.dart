@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'app_router.dart';
+import 'business_logic/cubit/sql/cubit.dart';
 import 'constnats/strings.dart';
 
 late String initialRoute;
@@ -34,14 +36,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MapMyWay',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider(
+      create: (context) => SqlCubit()..createDatabase(),
+      child: MaterialApp(
+        title: 'MapMyWay',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        onGenerateRoute: appRouter.generateRoute,
+        initialRoute: initialRoute,
       ),
-      onGenerateRoute: appRouter.generateRoute,
-      initialRoute: initialRoute,
     );
   }
 }

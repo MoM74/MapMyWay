@@ -1,7 +1,7 @@
 const loginScreen = '/login-screen';
 const otpScreen = '/otp-screen';
 const mapScreen = '/map-screen';
-const googleAPIKey = 'Your-key';
+const googleAPIKey = 'your Key';
 const suggestionsBaseUrl =
     'https://maps.googleapis.com/maps/api/place/autocomplete/json';
 const placeLocationBaseUrl =

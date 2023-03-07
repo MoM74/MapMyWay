@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_maps/business_logic/cubit/maps/maps_cubit.dart';
@@ -16,6 +15,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../business_logic/cubit/sql/cubit.dart';
+
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
 
@@ -27,7 +28,7 @@ class _MapScreenState extends State<MapScreen> {
   List<PlaceSuggestion> places = [];
   FloatingSearchBarController controller = FloatingSearchBarController();
   static Position? position;
-  Completer<GoogleMapController> _mapController = Completer();
+  final Completer<GoogleMapController> _mapController = Completer();
 
   static final CameraPosition _myCurrentLocationCameraPosition = CameraPosition(
     bearing: 0.0,
@@ -227,7 +228,7 @@ class _MapScreenState extends State<MapScreen> {
           isTimeAndDistanceVisible = true;
         });
       },
-      infoWindow: InfoWindow(title: "${placeSuggestion.description}"),
+      infoWindow: InfoWindow(title: placeSuggestion.description),
       icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
     );
 
@@ -279,6 +280,7 @@ class _MapScreenState extends State<MapScreen> {
         itemBuilder: (ctx, index) {
           return InkWell(
             onTap: () async {
+              saveToDatabase(index);
               placeSuggestion = places[index];
               controller.close();
               getSelectedPlaceLocation();
@@ -293,6 +295,11 @@ class _MapScreenState extends State<MapScreen> {
         itemCount: places.length,
         shrinkWrap: true,
         physics: const ClampingScrollPhysics());
+  }
+
+  void saveToDatabase(int index) {
+    BlocProvider.of<SqlCubit>(context)
+        .insertToDatabase(title: places[index].description);
   }
 
   void removeAllMarkersAndUpdateUI() {
@@ -316,11 +323,9 @@ class _MapScreenState extends State<MapScreen> {
         children: [
           position != null
               ? buildMap()
-              : Center(
-                  child: Container(
-                    child: const CircularProgressIndicator(
-                      color: MyColors.blue,
-                    ),
+              : const Center(
+                  child: CircularProgressIndicator(
+                    color: MyColors.blue,
                   ),
                 ),
           buildFloatingSearchBar(),
